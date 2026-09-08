@@ -1,7 +1,7 @@
 (ns aburi.tests.test-coverage
   "aburi 炙り — coverage-report tests (ADR-2606161630). CLJC suite."
   (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.set]
             [clojure.java.io :as io]
             [aburi.methods.analyze :as analyze]

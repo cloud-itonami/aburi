@@ -16,7 +16,7 @@
     - DRY-RUN by default — live requires ABURI_KOTOBA_LIVE=1.
   HTTP is an explicit injectable capability (:http-post / :transport); portable
   code has no ambient network or JSON authority."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [aburi.methods.kotoba :as kt]))
 
 ;; ─── constants ────────────────────────────────────────────────────────────────
@@ -85,7 +85,7 @@
 (defn- url-parts [endpoint]
   (if-let [[_ scheme netloc]
            (re-find #"^([A-Za-z][A-Za-z0-9+.\-]*)://([^/?#]*)" (str endpoint))]
-    {:scheme (str/lower-case scheme) :netloc netloc}
+    {:scheme (str/lower scheme) :netloc netloc}
     {:scheme nil :netloc nil}))
 
 (defn assert-kotoba
@@ -94,7 +94,7 @@
   [endpoint]
   (let [{:keys [scheme netloc]} (url-parts endpoint)]
     (when-not (and (= "http" scheme)
-                   (contains? allowed-kotoba-hosts (some-> netloc str/lower-case)))
+                   (contains? allowed-kotoba-hosts (some-> netloc str/lower)))
       (throw (ex-info (str "kotoba endpoint " (pr-str endpoint)
                            " is outside the fleet allowlist "
                            (vec (sort allowed-kotoba-hosts))

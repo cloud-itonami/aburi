@@ -15,7 +15,7 @@
   IDEMPOTENT-BY-CONTENT: a beat whose ground datoms equal the previous beat's is a NO-OP.
   No-server-key: appends to a local file only, no network I/O. G8: structure only — no
   credential, no raw PII."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [aburi.methods.datom-emit :as de]
             [aburi.methods.kotoba :as k]
             #?(:clj [clojure.java.io :as io])))
