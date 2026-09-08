@@ -18,7 +18,7 @@
 
   House style mirrors shiori.tests.test-analyze (clojure.test deftest/is)."
   (:require [clojure.test :refer [deftest is testing run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.set]
             [clojure.java.io :as io]
             [aburi.methods.analyze :as analyze]
@@ -58,7 +58,7 @@
     (let [forbidden ["password" "token" "secret" "credential" "cookie/value" "idfa" "gaid"
                      "imei" "raw" "pan" "email"]]
       (doseq [a (concat datom-emit/node-attrs datom-emit/edge-attrs)]
-        (let [low (str/lower-case a)]
+        (let [low (str/lower a)]
           (doseq [f forbidden]
             (is (not (str/includes? low f))
                 (str "G8 violation: emit attr " a " looks like a credential / raw id"))))))))

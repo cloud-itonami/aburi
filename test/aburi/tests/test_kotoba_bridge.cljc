@@ -3,7 +3,7 @@
   Covers: request shaping (URL/body/headers), dry-run mode, bridge_state cursor replay,
   exactly-once idempotency. All assertions offline — NO real network calls."
   (:require [clojure.test :refer [deftest testing is run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [aburi.methods.kotoba :as kt]
             [aburi.methods.kotoba-bridge :as kb]))
 

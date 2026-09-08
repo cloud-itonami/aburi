@@ -8,7 +8,7 @@
   makes the covered backbone measurable and names the next wave (more surfaces, more SDKs).
 
   Pure fns; reuses aburi.methods.analyze for the loader. Portable .cljc."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [aburi.methods.analyze :as analyze]))
 
 ;; honest external denominators (public scale context — NOT measurements of a person)

@@ -14,7 +14,7 @@
 
   Clojure keyword strings (':ns/name') are kept as strings (NOT Clojure keywords)
   throughout — for byte-parity with the Python implementation's CID preimage."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [aburi.methods.datom-emit :as de]
             #?(:clj [cheshire.core :as json])
             #?(:clj [clojure.edn :as edn])))
@@ -61,7 +61,7 @@
   [doc]
   (doseq [[path role leaf] (walk-node doc "")]
     (let [s (str leaf)
-          low (str/lower-case s)]
+          low (str/lower s)]
       (when (= role "key")
         (when (some #(str/includes? low %) forbidden-key-tokens)
           (throw (ex-info (str "G8: credential/raw-identifier key " (pr-str s)
@@ -191,7 +191,7 @@
   Exact match first, then substring containment, else nil. A name→collector mapping
   is a DISCLOSED fact (G3)."
   [name]
-  (let [low (str/lower-case (str/trim (str name)))]
+  (let [low (str/lower (str/trim (str name)))]
     (or (get name-collector low)
         (first (keep (fn [[alias cid]]
                        (when (or (str/includes? low alias)
@@ -339,13 +339,13 @@
           (add-datatype g did)
           (add-edge g sid pid ":grants" 0.7)
           (doseq [dom (get app "domains" [])]
-            (when-let [cid (get domain-collector (-> dom str/lower-case (str/replace #"^\." "")))]
+            (when-let [cid (get domain-collector (-> dom str/lower (str/replace #"^\." "")))]
               (add-collector g cid)
               (add-edge g pid cid ":flows-to" 0.8)
               (add-edge g cid did ":collects" 0.8)))))
       ;; a contacted ad domain with no mapped category still evidences a flow (via ad-id)
       (doseq [dom (get app "domains" [])]
-        (when-let [cid (get domain-collector (-> dom str/lower-case (str/replace #"^\." "")))]
+        (when-let [cid (get domain-collector (-> dom str/lower (str/replace #"^\." "")))]
           (when (empty? (get app "accessed" []))
             (add-perm g "ax.perm.ad-id")
             (add-datatype g "ax.dt.device-id")
@@ -369,7 +369,7 @@
             (add-perm g pid)
             (add-datatype g did)
             (add-edge g sid pid ":grants" 0.7)
-            (let [purpose (str/lower-case (str (get share "purpose" "")))
+            (let [purpose (str/lower (str (get share "purpose" "")))
                   load (if (or (str/includes? purpose "advertis")
                                (str/includes? purpose "marketing"))
                          0.8 0.4)

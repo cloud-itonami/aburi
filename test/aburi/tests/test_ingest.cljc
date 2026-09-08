@@ -3,7 +3,7 @@
   Covers: G2/G8 guard, adapter smoke, dedup edge logic, export_to_datoms round-trip.
   No network I/O. All assertions offline."
   (:require [clojure.test :refer [deftest testing is run-tests]]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [aburi.methods.ingest :as ingest]))
 
 ;; ─── test data ────────────────────────────────────────────────────────────────
@@ -214,7 +214,7 @@
   (testing "no credential/raw-id attr in emitted datoms"
     (let [datoms (ingest/export-to-datoms play-doc ":play-data-safety" "b0")]
       (doseq [[_op _e attr _v] datoms]
-        (let [low (str/lower-case (str attr))]
+        (let [low (str/lower (str attr))]
           (is (not (some #(str/includes? low %) ["password" "token" "bearer" "secret"
                                                   "cookie" "idfa" "gaid" "imei"]))
               (str "credential attr leaked to datom: " attr)))))))
