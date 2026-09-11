@@ -7,7 +7,7 @@ profiles another person.
 
 EDN metadata, schema, and representative seed are canonical. External DID JSON
 is isolated under `wire/`. Runtime code and tests live under `src/aburi` and
-`test/aburi`. Run the comprehensive suite with `bb test`.
+`test/aburi`. Run the comprehensive suite with `kbb -M:test`.
 
 Python twins, Go/TinyGo, wasm wrappers, shell runners, and legacy JSON-LD
 manifests are prohibited.

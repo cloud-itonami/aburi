@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; aburi 炙り — autonomous heartbeat: load the tracker-exposure graph → append GROUND datoms (cljc).
 (ns aburi.methods.autorun
   "autorun.cljc — aburi 炙り deterministic heartbeat (canonical CLJC implementation;

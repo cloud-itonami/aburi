@@ -44,7 +44,7 @@
   [v]
   ;; Portable: clj uses JVM Math/format; cljs (squint/ComponentizeJS wasm,
   ;; ADR-2606261200) uses native Number/Math/toPrecision. The :clj branch is
-  ;; unchanged (bb test parity); the :cljs branch is deterministic valid EDN.
+  ;; unchanged (kbb -M:test parity); the :cljs branch is deterministic valid EDN.
   (let [d         #?(:clj (double v) :cljs (js/Number v))
         finite?   #?(:clj (and (not (Double/isInfinite d)) (not (Double/isNaN d)))
                      :cljs (js/isFinite d))

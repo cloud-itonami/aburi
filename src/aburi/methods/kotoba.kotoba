@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; aburi 炙り — tracker-exposure graph DATOM-LOG writer (content-addressed commit-DAG, cljc).
 (ns aburi.methods.kotoba
   "kotoba.cljc — aburi 炙り append-only TRACKER-EXPOSURE LEDGER writer
